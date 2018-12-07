@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data class="RepoTypeItemBinding">
+
+
+        <variable
+            name="viewModel"
+            type="com.testtarget.network.model.TopWeekly" />
+        <variable
+            name="repoViewModel"
+            type="com.testtarget.network.model.TopWeekly.RepoEntity" />
+        <variable
+            name="eventHandler"
+            type="com.testtarget.ui.repo.TopRepoListActivity" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/parent_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:onClick="@{(view) -> eventHandler.onRepoTypeClicked(viewModel)}"
+        tools:ignore="MissingPrefix">
+
+        <RelativeLayout
+            android:id="@+id/activity_feed_main_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="14dp">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/place_image"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="9dp"
+                android:layout_marginRight="9dp"
+                android:scaleType="centerCrop"
+                app:profileAvatarUrl="@{viewModel.avatar}"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toEndOf="@+id/place_image"
+                android:layout_toRightOf="@+id/place_image">
+
+                <TextView
+                    android:id="@+id/repo_name"
+                    fontPath="fonts/lato_bold.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@android:color/black"
+                    android:text="@{repoViewModel.name}"
+                    android:textSize="17sp"
+                    tools:text="godspeak  Calvary  " />
+                <TextView
+                    android:id="@+id/repo_username"
+                    fontPath="fonts/lato_bold.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/repo_name"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{viewModel.username}"
+                    android:textSize="17sp"
+                    tools:text="Gusername  " />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/activity_feed_main_container"
+            android:background="@android:color/black" />
+    </RelativeLayout>
+</layout>

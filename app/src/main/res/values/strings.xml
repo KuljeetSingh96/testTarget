@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Test Target</string>
+    <string name="repository_description">Repository Description:</string>
+    <string name="top_weekly_repo">Top Weekly Repositories</string>
+</resources>
