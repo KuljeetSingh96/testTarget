@@ -27,9 +27,9 @@ public class TopRepoListPresenter {
     }
 
     private void setupListErrorVisibility(int errorVisibility, int listVisibility, int loadingVisibility) {
-        viewModel.errorMessageVisibility.setValue(errorVisibility);
-        viewModel.repoListVisibility.setValue(listVisibility);
-        viewModel.loadingVisibility.setValue(loadingVisibility);
+        viewModel.getErrorMessageVisibility().setValue(errorVisibility);
+        viewModel.getRepoListVisibility().setValue(listVisibility);
+        viewModel.getLoadingVisibility().setValue(loadingVisibility);
     }
 
     public void getTopWeeklyRepo() {
@@ -42,16 +42,16 @@ public class TopRepoListPresenter {
     private void onNetworkFailure(Throwable throwable) {
         //you can handle network exceptions here like retry dialog show error messages
         setupListErrorVisibility(View.VISIBLE, View.GONE, View.GONE);
-        viewModel.errorMessage.setValue("Network error. Please try again later.");
+        viewModel.getErrorMessage().setValue("Network error. Please try again later.");
     }
 
     private void onRepoListSuccess(List<TopWeekly> topWeeklies) {
         if (topWeeklies != null && topWeeklies.size() > 0) {
             setupListErrorVisibility(View.GONE, View.VISIBLE, View.GONE);
-            viewModel.repoListData.postValue(topWeeklies);
+            viewModel.getRepoListData().postValue(topWeeklies);
             return;
         }
         setupListErrorVisibility(View.VISIBLE, View.GONE, View.GONE);
-        viewModel.errorMessage.setValue("No list available.");
+        viewModel.getErrorMessage().setValue("No list available.");
     }
 }

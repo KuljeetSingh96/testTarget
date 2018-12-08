@@ -26,7 +26,7 @@ public class Repository {
         if (repository != null) {
             throw new RuntimeException("Use getRepository() method to get the single instance of this class.");
         }
-        restApi = RestApiProvider.getRestApi();
+        restApi = RestApiProvider.INSTANCE.getRestApi();
     }
 
     public static Repository getRepository() {
