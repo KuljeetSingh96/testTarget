@@ -11,6 +11,7 @@ import com.testtarget.databinding.TopRepoListActivityBinding;
 
 import com.testtarget.R;
 import com.testtarget.network.model.TopWeekly;
+import com.testtarget.network.repository.Repository;
 import com.testtarget.ui.repodetail.RepoDetailActivity;
 
 
@@ -26,7 +27,9 @@ public class TopRepoListActivity extends AppCompatActivity {
         setupBinding(viewModel);
         setupToolbar();
         setupRecyclerView();
+        presenter.getTopWeeklyRepo();
     }
+
     private void setupToolbar() {
         if (binding == null) {
             throw new IllegalStateException("Must initialize binding before calling setupToolbar!");
@@ -35,6 +38,7 @@ public class TopRepoListActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.top_weekly_repo);
     }
+
     private void setupRecyclerView() {
         if (presenter == null) {
             throw new IllegalStateException("Must initialize presenter before calling Journal setupRecyclerView!");
@@ -54,7 +58,8 @@ public class TopRepoListActivity extends AppCompatActivity {
     }
 
     private void setupPresenter(TopRepoListViewModel viewModel) {
-        presenter = new TopRepoListPresenter(viewModel);
+        Repository repository = Repository.getRepository();
+        presenter = new TopRepoListPresenter(viewModel, repository);
     }
 
     private TopRepoListViewModel createTopRepoListViewModel() {
@@ -63,6 +68,6 @@ public class TopRepoListActivity extends AppCompatActivity {
     }
 
     public void onRepoTypeClicked(TopWeekly topWeekly) {
-     startActivity(RepoDetailActivity.createIntent(this,topWeekly));
+        startActivity(RepoDetailActivity.createIntent(this, topWeekly));
     }
 }
