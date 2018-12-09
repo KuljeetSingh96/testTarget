@@ -13,7 +13,6 @@ public class BindingAdapters {
     public static void setprofileAvatarUrl(ImageView imageView, String profileAvatarUrl) {
         Context context = imageView.getContext();
         if (!TextUtils.isEmpty(profileAvatarUrl)) {
-            // TODO: Determine best method for loading this image
             Picasso.with(context)
                     .load(profileAvatarUrl)
                     .transform(new CircleTransformPurple())

@@ -13,6 +13,7 @@ import com.testtarget.R;
 import com.testtarget.network.model.TopWeekly;
 import com.testtarget.network.repository.Repository;
 import com.testtarget.ui.repodetail.RepoDetailActivity;
+import com.testtarget.utils.schedulers.SchedulerProvider;
 
 
 public class TopRepoListActivity extends AppCompatActivity {
@@ -59,7 +60,7 @@ public class TopRepoListActivity extends AppCompatActivity {
 
     private void setupPresenter(TopRepoListViewModel viewModel) {
         Repository repository = Repository.getRepository();
-        presenter = new TopRepoListPresenter(viewModel, repository);
+        presenter = new TopRepoListPresenter(viewModel, repository,new SchedulerProvider());
     }
 
     private TopRepoListViewModel createTopRepoListViewModel() {

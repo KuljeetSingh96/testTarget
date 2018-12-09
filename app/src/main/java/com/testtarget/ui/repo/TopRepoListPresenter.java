@@ -1,14 +1,13 @@
 package com.testtarget.ui.repo;
 
+import android.support.annotation.VisibleForTesting;
 import android.view.View;
 
 import com.testtarget.network.model.TopWeekly;
 import com.testtarget.network.repository.Repository;
+import com.testtarget.utils.schedulers.SchedulerProvider;
 
 import java.util.List;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by kuljeetsingh on 12/6/18.
@@ -19,23 +18,35 @@ public class TopRepoListPresenter {
     protected TopRepoListViewModel viewModel;
     private final String LANGUAGE = "java";
     private final String SINCE_TYPE = "weekly";
+    private  SchedulerProvider schedulerProvider;
 
-    public TopRepoListPresenter(TopRepoListViewModel viewModel, Repository repository) {
+    public TopRepoListPresenter(TopRepoListViewModel viewModel, Repository repository, SchedulerProvider schedulerProvider) {
         this.repository = repository;
         this.viewModel = viewModel;
+        this.schedulerProvider = schedulerProvider;
         setupListErrorVisibility(View.GONE, View.GONE, View.VISIBLE);
     }
 
+    @VisibleForTesting
+    SchedulerProvider getSchedulerProvider() {
+        return schedulerProvider;
+    }
+
+
+
     private void setupListErrorVisibility(int errorVisibility, int listVisibility, int loadingVisibility) {
+
         viewModel.errorMessageVisibility.setValue(errorVisibility);
         viewModel.repoListVisibility.setValue(listVisibility);
         viewModel.loadingVisibility.setValue(loadingVisibility);
     }
 
+
+
     public void getTopWeeklyRepo() {
         repository.getTopWeeklyRepo(LANGUAGE, SINCE_TYPE)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
                 .subscribe(this::onRepoListSuccess, this::onNetworkFailure);
     }
 
