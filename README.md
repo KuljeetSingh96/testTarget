@@ -23,12 +23,7 @@ It uses of following libraries:
 * [Picasso] (http://square.github.io/picasso/) for image loading.
 
 # Here is what the app gradle look likes.
-
-  buildscript {
-    repositories {
-        maven { url 'https://maven.fabric.io/public' }
-    }
-
+```
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -83,8 +78,7 @@ dependencies {
     //image
     implementation "com.squareup.picasso:picasso:$rootProject.picassoVersion"
 
-    //test libraries
-    testImplementation 'junit:junit:4.12'
+    //instrument libraries
     androidTestImplementation "com.android.support.test:runner:$rootProject.runnerVersion"
     androidTestImplementation "com.android.support.test:rules:$rootProject.runnerVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.espressoVersion"
@@ -96,10 +90,15 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude module: 'recyclerview-v7'
     }
+    //unit test libraries
+    testImplementation 'org.mockito:mockito-core:2.18.3'
+    testImplementation 'junit:junit:4.12'
+    testImplementation "android.arch.core:core-testing:1.1.1"
 }
 repositories {
     mavenCentral()
 }
+```
 
 # Start from
 
