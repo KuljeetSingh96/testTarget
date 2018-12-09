@@ -12,7 +12,6 @@ object BindingAdapters {
     fun setProfileAvatarUrl(imageView: ImageView, profileAvatarUrl: String) {
         val context = imageView.context
         if (!TextUtils.isEmpty(profileAvatarUrl)) {
-            // TODO: Determine best method for loading this image
             Picasso.with(context)
                     .load(profileAvatarUrl)
                     .transform(CircleTransformPurple())

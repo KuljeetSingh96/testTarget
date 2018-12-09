@@ -10,7 +10,7 @@ import io.reactivex.schedulers.Schedulers
  * Created by kuljeetsingh on 12/6/18.
  */
 
-class TopRepoListPresenter(protected var viewModel: TopRepoListViewModel, private val repository: Repository) {
+class TopRepoListPresenter(var viewModel: TopRepoListViewModel, private val repository: Repository) {
     private val LANGUAGE = "java"
     private val SINCE_TYPE = "weekly"
 
